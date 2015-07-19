@@ -1,2 +1,8 @@
+
+
 def main():
-	pass
+    print "hello"
+    pass
+
+if __name__ == "__main__":
+    main()
