@@ -11,9 +11,14 @@ class Nfa(object):
         :return:
         """
         self.state = 0
+        # 边
         self.edge = ''
+        # 下一个状态
         self.next1 = ''
         self.next2 = ''
+        self.ccl = set()
+        # 锚点（行首、行末、首尾、无）
+        self.anchor = 0
 
     def gen(self):
         """
