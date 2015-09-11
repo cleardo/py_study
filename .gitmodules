@@ -1,0 +1,3 @@
+[submodule "cof"]
+	path = cof
+	url = git@github.com:cleardo/cof.git
