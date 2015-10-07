@@ -16,7 +16,7 @@ Clayton. VIC Australia
 """
 
 import sys
-import tkinter
+import Tkinter as tkinter
 import Pmw
 import time
 

@@ -4,7 +4,7 @@ title = 'Pmw.ButtonBox demonstration'
 import sys
 sys.path[:0] = ['../../..']
 
-import tkinter
+import Tkinter as tkinter
 import Pmw
 
 class Demo:

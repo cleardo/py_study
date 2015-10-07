@@ -5,7 +5,7 @@ import sys
 sys.path[:0] = ['../../..']
 
 import time
-import tkinter
+import Tkinter as tkinter
 import Pmw
 
 class Demo:

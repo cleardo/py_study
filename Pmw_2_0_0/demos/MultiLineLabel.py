@@ -5,7 +5,7 @@ import sys
 sys.path[:0] = ['../../..']
 
 import string
-import tkinter
+import Tkinter as tkinter
 import Pmw
 
 class Demo:

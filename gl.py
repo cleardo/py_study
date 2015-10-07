@@ -21,14 +21,15 @@ class MazeCell:
 
 class Maze:
     def __init__(self,dimx,dimy):
-        self.numx=dimx
-        self.numy=dimy
+        self.numx = dimx
+        self.numy = dimy
         
-        assert dimx>0
-        assert dimy>0
+        assert dimx > 0
+        assert dimy > 0
         
         # Create a field filled with walls
-        self.cells=[]
+        self.cells = []
+
         for i in range(0,dimx*dimy):
             self.cells.append(MazeCell(i%dimx,i/dimx))
         
@@ -143,3 +144,4 @@ if __name__ == '__main__':
     glutDisplayFunc(displayFun)
     initFun()
     glutMainLoop()
+

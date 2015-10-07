@@ -1,8 +1,10 @@
+# coding=utf-8
+
 __author__ = 'Administrator'
 
-import zipfile
 import cof.http as cofHttp
 
+# 数据分析API
 api = 'api.data.91open.com'
 port = 80
 

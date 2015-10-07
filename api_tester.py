@@ -9,6 +9,8 @@ from Tkinter import *
 
 root = Tk()
 
+# 界面布局使用frame来布局，类似div
+# 设置frame
 text_frame = Frame(borderwidth=1, relief="sunken")
 
 api_text = Text(text_frame)
@@ -33,11 +35,14 @@ def my_hl(arg, t):
         ins_pos_info = ins_pos.split('.')
         print "插入点", ins_pos
         print ins_pos_info
+
         ch_pos = int(ins_pos_info[1]) - 1
         color_idx = "%s.%s" % (ins_pos_info[0], ch_pos)
         print "语法加亮", color_idx
+
         t.mark_set("matchStart2", color_idx)
         t.mark_set("matchEnd2", "%s+1c" % color_idx)
+
         # t.insert(END, "hello", "val_color")
         t.tag_add("val_color", "matchStart2", "matchEnd2")
     else:
@@ -47,11 +52,14 @@ def my_hl(arg, t):
         ins_pos = t.index("insert")
         end_pos = t.index("1.end")
         print "end pos", end_pos
+
         ins_pos_info = ins_pos.split('.')
         print "插入点", ins_pos
         print ins_pos_info
+
         ch_pos = int(ins_pos_info[1])
         print "ch pos: ", ch_pos
+
         color_idx = "%s.%s" % (ins_pos_info[0], ch_pos)
         print "语法加亮", color_idx
 
@@ -69,8 +77,10 @@ def my_hl(arg, t):
             line = t.get(mark, next)
             print len(line), repr(line)
             print next
+
             t.mark_set("matchStart", "1.1+1c")
             t.mark_set("matchEnd", "1.1+2c")
+
             t.tag_add("key_color", "1.0+0c", "1.0+1c")
             t.tag_add("val_color", "1.0+1c", "1.0+2c")
         elif ch_pos == 2:
@@ -82,13 +92,14 @@ def my_hl(arg, t):
 api_text.tag_configure("key_color", foreground="#ff0000")
 api_text.tag_configure("val_color", foreground="#cccccc")
 
+# 绑定键盘事件，根据keysym来判断当前按键
 api_text.bind('<KeyPress>', lambda e, t=api_text: my_hl(e, t))
 
 #api_text.bind('<KeyPress>', lambda e, t=api_text: t.insert(END, "I'll bite your legs off!"))
 
-api_text.tag_bind('bite', '<1>',
-              lambda e, t=api_text: t.insert(END, "I'll bite your legs off!"))
+api_text.tag_bind('bite', '<1>', lambda e, t=api_text: t.insert(END, "I'll bite your legs off!"))
 
 text_frame.pack(side=BOTTOM, fill=BOTH, expand=True)
 
 root.mainloop()
+

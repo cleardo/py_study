@@ -16,9 +16,13 @@ __version__ = '$Id: PmwFileDialog.py,v 1.2.2.1 2012/08/04 00:56:51 adyh Exp $'
 # Please send bug-fixes/patches/features to <r.hooft@euromail.com>
 #
 ################################################################################
+
 import os,fnmatch,time
-import tkinter,Pmw
+import Tkinter as tkinter
+import Pmw
+
 import collections
+
 #Pmw.setversion("0.8.5")
 
 def _errorpop(master,text):

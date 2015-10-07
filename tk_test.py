@@ -6,6 +6,6 @@ from Tkinter import Label, mainloop
 
 Label(text='This').pack()
 
-#lex.lex()
+lex.lex()
 
 mainloop()

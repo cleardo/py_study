@@ -1,14 +1,18 @@
+# coding=utf-8
 # Authors: Joe VanAndel, Greg McFarlane and Daniel Michelson
 
 import string
 import sys
 import time
-import tkinter
+import Tkinter as tkinter
 import Pmw
 import collections
 
 class FullTimeCounter(Pmw.MegaWidget):
-    """Up-down counter
+    """
+    Up-down counter
+
+    定义时间大控件
 
     A TimeCounter is a single-line entry widget with Up and Down arrows
     which increment and decrement the Time value in the entry.
@@ -470,6 +474,7 @@ class FullTimeCounter(Pmw.MegaWidget):
             self._timerId = None
         Pmw.MegaWidget.destroy(self)
 
+
 if __name__=="__main__":
 
     def showString():
@@ -478,6 +483,7 @@ if __name__=="__main__":
 
     root = tkinter.Tk()
     Pmw.initialise(root)
+
     root.title('FullTimeCounter')
 
     exitButton = tkinter.Button(root, text = 'Exit', command = root.destroy)
@@ -486,6 +492,7 @@ if __name__=="__main__":
     _time = FullTimeCounter(root,
             labelpos = 'n',
             label_text = 'YYYY:MM:DD:HH:mm')
+
     _time.pack(fill = 'both', expand = 1, padx=10, pady=5)
 
     button = tkinter.Button(root, text = 'Show', command = showString)

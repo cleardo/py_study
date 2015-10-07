@@ -1,6 +1,11 @@
 # coding=utf-8
 __author__ = 'Administrator'
 
+"""
+text控件方法
+
+"""
+
 
 class Widget():
     pass
@@ -372,3 +377,15 @@ class Text(Widget, XView, YView):
     def yview_pickplace(self, *what):
         """Obsolete function, use see."""
         self.tk.call((self._w, 'yview', '-pickplace') + what)
+
+
+if __name__ == "__main__":
+    from Tkinter import *
+
+    root = Tk()
+
+    text = Text(root, borderwidth=0)
+
+    text.pack(side=TOP)
+
+    root.mainloop()

@@ -4,7 +4,7 @@ title = 'Pmw.HistoryText demonstration'
 import sys
 sys.path[:0] = ['../../..']
 
-import tkinter
+import Tkinter as tkinter
 import Pmw
 
 class Demo:
@@ -38,7 +38,8 @@ class Demo:
             ['Redo', self.historyText.redo],
             [20, None],
             ['Prev', self.historyText.prev],
-            ['Next', self.historyText.__next__],
+            # ['Next', self.historyText.__next__],
+            ['Next', self.historyText.prev],
             [30, None],
             ['Execute', Pmw.busycallback(self.executeQuery)],
         )

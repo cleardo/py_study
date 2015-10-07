@@ -4,7 +4,7 @@ title = 'Demonstration of how to create a megawidget'
 import sys
 sys.path[:0] = ['../../..']
 
-import tkinter
+import Tkinter as tkinter
 import Pmw
 
 class TextDisplay(Pmw.MegaWidget):
