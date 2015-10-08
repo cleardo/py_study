@@ -11,6 +11,9 @@ class Dfa(object):
         :return:
         """
 
+        # 接受状态的动作
+        self.accept = ""
+
         # 状态数
         self.nstates = 0
 
@@ -47,5 +50,6 @@ class Dfa(object):
 
         :return:
         """
+
         return self.nstates
 
