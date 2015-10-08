@@ -39,6 +39,7 @@ class Lexer(object):
         # 读写对象，实现IO接口
         self.io = None
         self.buf = ""
+        self.ptr = 0
 
     def set_io(self, fp):
         """
@@ -59,7 +60,11 @@ class Lexer(object):
 
         :return:
         """
-        pass
+        if self.ptr > len(self.buf):
+            # 指针
+            return True
+        else:
+            return False
 
     def advance(self):
         """
