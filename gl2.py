@@ -38,10 +38,18 @@ def displayFun():
 
 if __name__ == '__main__':
     glutInit()
+
     glutInitWindowSize(640,480)
+
     glutCreateWindow("Viewport")
+
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+
     glutDisplayFunc(displayFun)
+
     glutReshapeFunc(reshapeFun)
+
     initFun()
+
     glutMainLoop()
+
