@@ -126,6 +126,16 @@ class Lexer(object):
         # 如果是宏，则获取对应的宏，将当前输入压入堆栈，设置当前字符缓冲区为宏文本
         return Tokmap[tok_idx]
 
+    def match(self, tok):
+        """
+        判断是否匹配token
+
+        :param tok:
+        :return:
+        """
+        if self.tok == tok:
+            return True
+
     def token(self):
         return Tokmap[0]
 
