@@ -46,6 +46,17 @@ class NfaMachine(object):
         self.states = list()
         self.nstate = 0
 
+    def make_nfa(self):
+        """
+        构造非确定性状态机
+
+        :return:
+        """
+        sstate = self.new_state()
+
+        # 返回状态数
+        return 0
+
     def new_state(self):
         self.states.append(Nfa())
         state = self.states[self.nstate]
@@ -61,7 +72,7 @@ class NfaMachine(object):
 
         while True:
             # 读到末尾
-            p.next2 = Nfa()
+            p.next2 = self.new_state()
             p = p.next2
             p.next1 = self.rule()
             break
@@ -124,7 +135,6 @@ class NfaMachine(object):
                 for i in range():
                     ccl_set.add(first)
 
-
     def __str__(self):
         pass
 
@@ -133,5 +143,7 @@ if __name__ == "__main__":
     start = nfa_machine.machine()
     print start
     print start.next2.next1.edge
+    print "状态机的状态数"
+    print len(nfa_machine.states)
 
 

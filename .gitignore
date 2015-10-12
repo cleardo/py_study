@@ -55,3 +55,5 @@ Temporary Items
 .idea/misc.xml
 
 .idea/py_study.iml
+
+*.pyc

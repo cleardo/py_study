@@ -28,8 +28,8 @@ class SampleApp(tk.Tk):
         self._drag_data = {"x": 0, "y": 0, "item": None}
 
         # create a couple movable objects
-        self._create_token((100, 100), "white")
-        self._create_token((200, 100), "black")
+        self._create_token((100, 100), "#3498db")
+        self._create_token((200, 100), "#e74c3c")
 
         # add bindings for clicking, dragging and releasing over
         # any object with the "token" tag
@@ -39,7 +39,10 @@ class SampleApp(tk.Tk):
         self.canvas.tag_bind("token", "<B1-Motion>", self.OnTokenMotion)
 
     def _create_token(self, coord, color):
-        '''Create a token at the given coordinate in the given color'''
+        '''Create a token at the given coordinate in the given color
+        创建一个状态
+        '''
+
         # 坐标
         (x, y) = coord
 
@@ -52,6 +55,7 @@ class SampleApp(tk.Tk):
         '''Being drag of an object'''
         # record the item and its location
         # 事件的x坐标和y坐标
+        # 查找跟点击事件最近的那个canvas
         self._drag_data["item"] = self.canvas.find_closest(event.x, event.y)[0]
         self._drag_data["x"] = event.x
         self._drag_data["y"] = event.y
@@ -73,9 +77,13 @@ class SampleApp(tk.Tk):
         # compute how much this object has moved
         delta_x = event.x - self._drag_data["x"]
         delta_y = event.y - self._drag_data["y"]
+
         # move the object the appropriate amount
         self.canvas.move(self._drag_data["item"], delta_x, delta_y)
+
         # record the new position
+        # 记录新位置
+        # 下次拖动时使用
         self._drag_data["x"] = event.x
         self._drag_data["y"] = event.y
 

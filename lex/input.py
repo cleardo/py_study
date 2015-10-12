@@ -12,6 +12,7 @@ class Input(object):
         self.file = filename
         self.fp = open(self.file, 'r')
         self.input_buf = StringIO.StringIO()
+        self.curr_ptr = 0
 
     def get_line(self):
         line = self.fp.readline()
@@ -40,7 +41,11 @@ class Input(object):
         # 看到一个转义字符
         saw_esc = 0
 
-        pass
+        self.curr_ptr += 1
+
+        curr_char = self.input_buf[self.curr_ptr]
+
+        return curr_char
 
 
 if __name__ == "__main__":

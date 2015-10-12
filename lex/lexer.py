@@ -31,7 +31,69 @@ def match():
 
 class Lexer(object):
     def __init__(self):
-        pass
+        """
+
+        :return:
+        """
+
+        # 读写对象，实现IO接口
+        self.io = None
+        self.buf = ""
+        self.ptr = 0
+
+    def set_io(self, fp):
+        """
+        设置IO函数
+
+        #. 从文件读写
+        #. 从终端读写
+
+        :return:
+        """
+        self.io = fp()
+
+        return fp
+
+    def end_of_buf(self):
+        """
+        判断是否到达了缓冲区的末尾
+
+        :return:
+        """
+        if self.ptr > len(self.buf):
+            # 指针
+            return True
+        else:
+            return False
+
+    def advance(self):
+        """
+        从字符缓冲区读入一个字符
+
+        :return:
+        """
+
+        if self.end_of_buf():
+            # 如果到达缓冲区末尾，则需要从文件中读取下一行数据
+            data = self.io.readline()
+            self.buf = data
+
+        ch = self.io.read(1)
+        return ch
 
     def token(self):
         return Tokmap[0]
+
+
+if __name__ == "__main__":
+    print "lex输入文件词法解析，在模板驱动程序中使用"
+
+    def get_line():
+        fp = open("demo.l", "r")
+        return fp
+
+    lexer = Lexer()
+    lexer.set_io(get_line)
+    # lexer.advance()
+    print lexer.advance()
+
