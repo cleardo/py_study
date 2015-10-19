@@ -96,7 +96,7 @@ class NfaMachine(object):
         nfa_state.edge = "rule"
         return nfa_state
 
-    def term(self):
+    def term(self, startp, endp):
         """
         处理单个字符
 
@@ -108,9 +108,14 @@ class NfaMachine(object):
 
         在DFA中，是单个的结点
 
+        [] 识别空格、tab
+
         :return:
         """
-        start = Nfa()
+
+        start = self.new_state()
+
+        startp.next1 = start
 
         if False:
             # expr
@@ -135,6 +140,13 @@ class NfaMachine(object):
                 for i in range():
                     ccl_set.add(first)
 
+    def tompson(self):
+        """
+        tompson 状态机构造法
+
+        :return:
+        """
+
     def __str__(self):
         pass
 
@@ -145,5 +157,9 @@ if __name__ == "__main__":
     print start.next2.next1.edge
     print "状态机的状态数"
     print len(nfa_machine.states)
+
+    # 按引用传值
+    nfa_machine.term(start, start)
+    print start.next1.edge
 
 
