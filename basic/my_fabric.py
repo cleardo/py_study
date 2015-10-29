@@ -45,7 +45,6 @@ for row in cur:
 
 exit()
 
-
 config = {
     "fabric":fabinst,
     "user":"user_n5s6dzrlcu",
