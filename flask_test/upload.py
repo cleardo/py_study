@@ -47,11 +47,16 @@ def index():
     # view中调用wtf.quick_form()
     form = UploadForm()
 
+    print request.files
+
+    f = request.files['file']
+    filename = secure_filename(f.filename)
+    f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
     if form.validate_on_submit():
-        file = request.files['up_file']
+        file = request.files['file']
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        pass
         print "ok"
 
     # render_template()
