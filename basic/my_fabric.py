@@ -8,6 +8,8 @@ __author__ = 'linzh'
 
 """
 测试mysql fabric
+
+mysql-connector 只支持1.2.3版本
 """
 
 fabric_config={
@@ -34,6 +36,7 @@ config = {
 }
 
 conn = mysql.connector.connect(**config)
+# conn.set_property(group="my_group_3307", mode=fabric.MODE_READWRITE)
 conn.set_property(group="my_group_3307", mode=fabric.MODE_READONLY)
 
 cur = conn.cursor()
