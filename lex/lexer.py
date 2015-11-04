@@ -65,6 +65,9 @@ def match():
 
 
 class Lexer(object):
+    # 默认未开始解析字符串
+    inquote = 0
+
     def __init__(self):
         """
 
@@ -119,6 +122,13 @@ class Lexer(object):
             data = self.io.readline()
             self.buf = data
 
+        if self.tok == EOS:
+            # 如果当前是字符串结束
+            pass
+
+        # 如果解析到了字符串结束'\0'
+        # 如果堆栈中有未解析的宏
+
         ch = self.io.read(1)
 
         tok_idx = ord(ch)
@@ -159,3 +169,4 @@ if __name__ == "__main__":
     print lexer.tok_len()
     print chr(122)
     print repr(chr(0))
+
