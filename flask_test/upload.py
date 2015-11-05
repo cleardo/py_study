@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os
+import datetime
 
 from flask.ext.wtf import Form
 from werkzeug.utils import secure_filename
@@ -16,6 +17,8 @@ from flask.ext.mail import Message
 from flask.ext.mail import Mail
 
 from flask.ext.bootstrap import Bootstrap
+
+from flask.ext.moment import Moment
 
 app = Flask(__name__)
 
@@ -36,6 +39,7 @@ app.config['MAIL_PASSWORD'] = "2216593flik"
 mail = Mail(app)
 manager = Manager(app)
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 class UploadForm(Form):
     name = StringField("file")
@@ -44,6 +48,12 @@ class UploadForm(Form):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    form = UploadForm()
+
+    return render_template("upload.html", current_time=datetime.datetime.utcnow(), form=form)
+
+@app.route('/', methods=['GET', 'POST'])
+def upload():
     # view中调用wtf.quick_form()
     form = UploadForm()
 

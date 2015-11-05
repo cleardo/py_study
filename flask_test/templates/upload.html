@@ -8,6 +8,9 @@
 
 表单
 
+<p>{{moment(current_time).format('LLL')}}</p>
+<p>{{moment(current_time).fromNow(refresh=True)}}</p>
+
 <ul id="filelist"></ul>
 <br />
 
@@ -21,6 +24,10 @@
 {% block scripts %}
 
 {{super()}}
+
+{{moment.include_moment()}}
+
+{{moment.lang('zh-CN')}}
 
 <script type="text/javascript" src="/static/js/plupload.full.min.js"></script>
 
