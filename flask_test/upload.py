@@ -52,7 +52,19 @@ def index():
 
     return render_template("upload.html", current_time=datetime.datetime.utcnow(), form=form)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/chosen', methods=['GET', 'POST'])
+def chosen():
+    return render_template("chosen.html")
+
+@app.route('/steps', methods=['GET', 'POST'])
+def step():
+    return render_template("steps.html")
+
+@app.route('/jsonp', methods=['GET', 'POST'])
+def jsonp_test():
+    return ""
+
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
     # view中调用wtf.quick_form()
     form = UploadForm()
