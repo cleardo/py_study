@@ -1,0 +1,40 @@
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
+
+test
+
+<div id="res">
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+{{ super() }}
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            type: "get",
+            async: false,
+            url: "http://127.0.0.1:5000/jsonp",
+            dataType: "jsonp",
+            jsonp: "callbackparam",
+            jsonpCallback: "successCallback",
+            success: function(json) {
+                console.log(json);
+                // 设置页面
+                $('#res').html(json['key']);
+            },
+            error: function(data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
+    })
+
+</script>
+
+{% endblock %}

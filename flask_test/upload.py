@@ -2,13 +2,15 @@
 import os
 import datetime
 
+from tornado.escape import *
+
 from flask.ext.wtf import Form
 from werkzeug.utils import secure_filename
 from wtforms import StringField, FileField, SubmitField
 
 __author__ = 'donglin'
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 
 from flask.ext.script import Manager
 
@@ -51,6 +53,40 @@ def index():
     form = UploadForm()
 
     return render_template("upload.html", current_time=datetime.datetime.utcnow(), form=form)
+
+@app.route("/jsonp")
+def jsonp():
+    args = request.args
+    print args
+    func_name = args["callbackparam"]
+
+    retn = {"data": [["value"], ["value2"]]}
+    retn = func_name + '(' + json_encode(retn) + ')'
+    resp = Response(retn, status=200, mimetype="application/json")
+    return resp
+
+@app.route('/jsonp_table')
+def jsonp_table():
+    args = request.args
+
+    print args
+
+    func_name = args["callback"]
+
+    retn = {"data": [["value", "row1.col2"], ["value2", "row2.col2"]]}
+    retn = func_name + '(' + json_encode(retn) + ')'
+    resp = Response(retn, status=200, mimetype="application/json")
+    return resp
+
+
+@app.route('/cross', methods=['GET', 'POST'])
+def cross():
+    """
+    跨域
+
+    :return:
+    """
+    return render_template("cross.html")
 
 @app.route('/chosen', methods=['GET', 'POST'])
 def chosen():

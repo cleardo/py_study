@@ -1,0 +1,29 @@
+
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+
+{{ super() }}
+
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{{ super() }}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("test");
+
+        $.get("http://www.baidu.com", function(data) {
+            console.log(data);
+        })
+    })
+
+</script>
+
+{% endblock %}
