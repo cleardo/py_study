@@ -1,8 +1,13 @@
 {% extends "bootstrap/base.html" %}
 
 {% block styles %}
+
 {{ super() }}
+
+{# 步骤效果 #}
+<link rel="stylesheet" href="static/css/code.css"/>
 <link href="static/css/jquery.steps.css" rel="stylesheet">
+
 {% endblock %}
 
 {% block content %}
@@ -10,7 +15,12 @@
 <div id="example-vertical">
     <h3>运行monkey命令</h3>
     <section>
-        <p>Try the keyboard navigation by clicking arrow left or right!</p>
+        <p>请使用您的cmd命令窗口使用以下命令运行monkey</p>
+        {% highlight 'shell', lineno='inline' %}
+
+        adb shell monkey
+
+        {% endhighlight %}
     </section>
     <h3>上传测试结果</h3>
     <section>
@@ -19,11 +29,11 @@
         </form>
         <p></p>
     </section>
-    <h3></h3>
+    <h3>获取启动时间</h3>
     <section>
         <p>The next and previous buttons help you to navigate through your content.</p>
     </section>
-    <h3></h3>
+    <h3>记录启动时间</h3>
     <section>
         <p>The next and previous buttons help you to navigate through your content.</p>
     </section>

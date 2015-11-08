@@ -22,7 +22,13 @@ from flask.ext.bootstrap import Bootstrap
 
 from flask.ext.moment import Moment
 
-app = Flask(__name__)
+
+class MyFlask(Flask):
+    jinja_options = dict(Flask.jinja_options)
+    jinja_options.setdefault('extensions', []).append('jinja2_highlight.HighlightExtension')
+
+
+app = MyFlask(__name__)
 
 app.config['SECRET_KEY'] = "cleardoa*b(c%225588"
 
