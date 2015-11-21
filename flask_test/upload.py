@@ -2,6 +2,8 @@
 import os
 import datetime
 
+from cross import crossdomain
+
 from tornado.escape import *
 
 from flask.ext.wtf import Form
@@ -49,6 +51,10 @@ manager = Manager(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
+from flask.ext.cors import CORS
+
+# cors = CORS(app, resources={r"/jsonp": {"origins": "*"}, r"/upload": {"origins": "*"}})
+
 class UploadForm(Form):
     name = StringField("file")
     up_file = FileField(u"上传")
@@ -60,7 +66,7 @@ def index():
 
     return render_template("upload.html", current_time=datetime.datetime.utcnow(), form=form)
 
-@app.route("/jsonp")
+@app.route("/jsonp2")
 def jsonp():
     args = request.args
     print args
@@ -100,11 +106,17 @@ def chosen():
 
 @app.route('/steps', methods=['GET', 'POST'])
 def step():
-    return render_template("steps.html")
+    return render_template("steps.html"), 200
 
-@app.route('/jsonp', methods=['GET', 'POST'])
+
+@app.route('/jsonp', methods=['GET', 'POST', 'OPTIONS'])
+@crossdomain(origin='*', methods=['OPTIONS'])
 def jsonp_test():
-    return ""
+    print request.form
+    return "jsonp"
+    # print request.data
+    # post_data = json_decode(request.data)
+    # return json_encode({"key": post_data.get('key')}), 200, {'Access-Control-Allow-Origin': 'http://127.0.0.1:5001'}
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -112,6 +124,9 @@ def upload():
     form = UploadForm()
 
     print request.files
+
+    if request.method == 'GET':
+        return render_template("client/upl.html", form=form)
 
     f = request.files['file']
     filename = secure_filename(f.filename)
@@ -123,8 +138,8 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         print "ok"
 
+    return "", 200, {'Access-Control-Allow-Origin': '*'}
     # render_template()
-    return render_template("upload.html", form=form)
 
 @app.route('/mail')
 def mail():
@@ -139,4 +154,4 @@ def mail():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

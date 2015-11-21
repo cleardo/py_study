@@ -1,4 +1,8 @@
+{% extends "bootstrap/base.html" %}
+
 <link rel="stylesheet" href="static/css/code.css"/>
+
+{% block content %}
 
 {% highlight 'shell', lineno='inline' %}
 
@@ -17,3 +21,28 @@ class MyClass(object):
         pass
 
 {% endhighlight %}
+
+<button type="button" id="submit">button</button>
+
+{% endblock %}
+
+{% block scripts %}
+
+{{super()}}
+
+<script type="text/javascript">
+
+    $(document).ready(function()
+    {
+        $('#submit').click(
+                function() {
+                    console.log("post");
+                    $.post("http://127.0.0.1:5000/jsonp", {key: "value2"}, function (data) {
+                        console.log(data);
+                    })
+                }
+        )
+    })
+</script>
+
+{% endblock %}

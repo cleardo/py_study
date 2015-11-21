@@ -1,0 +1,92 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+
+{{super()}}
+
+{% endblock %}
+
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    <span>log: </span>
+    <input type="text" value="test" name="log_name">
+
+    <input type="submit" value="submit" id="submitBtn">
+</form>
+
+<ul id="filelist"></ul>
+
+<br />
+
+<div id="container">
+    <a id="browse" href="javascript:;">请选择日志进行上传</a>
+    <br />
+    <a id="start-upload" href="javascript:;">开始上传日志</a>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+{{super()}}
+
+<script type="text/javascript" src="/static/js/plupload.full.min.js"></script>
+
+<script type="text/javascript">
+    var uploader = new plupload.Uploader({
+        browse_button: 'browse', // this can be an id of a DOM element or the DOM element itself
+        url: 'http://192.168.1.106:5000/jsonp'
+    });
+
+    uploader.init();
+
+    // 绑定添加文件事件
+    uploader.bind('FilesAdded', function(up, files) {
+        var html = '';
+
+        plupload.each(files, function(file) {
+            html += '<li id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></li>';
+        });
+
+        document.getElementById('filelist').innerHTML += html;
+    });
+
+    uploader.bind('UploadProgress', function(up, file) {
+        console.log("上传进度");
+        console.log(up);
+        console.log(file);
+        document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+    });
+
+
+    uploader.bind('Error', function(up, err) {
+        document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+    });
+
+    document.getElementById('start-upload').onclick = function() {
+        // 开始上传
+        uploader.start();
+    };
+
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            var formData = {
+                'name':  $('input[name=log_name]').val()
+            }
+
+            console.log(formData);
+
+            uploader.start();
+            $.post("http://127.0.0.1:5000/jsonp", formData, function (data) {
+                console.log(data);
+            })
+
+            event.preventDefault();
+        })
+    })
+
+</script>
+
+{% endblock %}
