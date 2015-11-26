@@ -11,6 +11,7 @@ all:
 git:
 	git pull; \
 	cd cof; \
+	git pull; \
 	git add .; \
 	git commit -m"cof framework"; \
 	git push origin master
