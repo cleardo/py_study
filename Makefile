@@ -1,14 +1,19 @@
+SVN_DIR=Makefile
+
 all:
-	git pull
-	git add Makefile
-	git add flask_test
-	git add basic
-	git add cof
-	git add mongo_test
-	git commit -m"python study"
+	git add $(SVN_DIR)
+	git commit $(SVN_DIR) -m"python study"
 	git push origin master
 
+up:
+	cd cof; \
+	git pull
+
 git:
+	cd cof; \
+	make git
+
+git2:
 	git pull; \
 	cd cof; \
 	git pull; \
